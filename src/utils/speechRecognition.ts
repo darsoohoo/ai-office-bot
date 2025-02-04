@@ -1,3 +1,5 @@
+
+let recognition: SpeechRecognition | null = null;
 export function startListening(callback: (text: string) => void) {
     // Ensure compatibility across browsers
     const SpeechRecognition =
@@ -13,7 +15,7 @@ export function startListening(callback: (text: string) => void) {
     recognition.continuous = true;
     recognition.interimResults = false;
 
-    recognition.onresult = (event: SpeechRecognitionEvent) => {
+    recognition.onresult = (event: any) => {
         const transcript = event.results[event.results.length - 1][0].transcript;
         callback(transcript);
     };
@@ -26,3 +28,8 @@ export function startListening(callback: (text: string) => void) {
 }
 
 
+export function stopListening() {
+    if (recognition) {
+        recognition.stop();
+    }
+}

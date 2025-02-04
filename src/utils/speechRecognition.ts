@@ -1,5 +1,5 @@
+let recognition: typeof SpeechRecognition | null = null;
 
-let recognition: SpeechRecognition | null = null;
 export function startListening(callback: (text: string) => void) {
     // Ensure compatibility across browsers
     const SpeechRecognition =
@@ -9,7 +9,8 @@ export function startListening(callback: (text: string) => void) {
         console.error("Speech Recognition is not supported in this browser.");
         return;
     }
-    const recognition = new SpeechRecognition();
+
+    recognition = new SpeechRecognition();
     recognition.lang = "en-US";
     recognition.continuous = true;
     recognition.interimResults = false;
@@ -25,7 +26,6 @@ export function startListening(callback: (text: string) => void) {
 
     recognition.start();
 }
-
 
 export function stopListening() {
     if (recognition) {

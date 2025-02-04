@@ -9,7 +9,6 @@ export function startListening(callback: (text: string) => void) {
         console.error("Speech Recognition is not supported in this browser.");
         return;
     }
-
     const recognition = new SpeechRecognition();
     recognition.lang = "en-US";
     recognition.continuous = true;
